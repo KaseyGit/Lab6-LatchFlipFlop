@@ -1,4 +1,4 @@
-module srff(input S, input R, input CLK,reg Q, QBAR);
+module srff(input S, input R, input CLK,output reg Q, QBAR);
 	assign QBAR = ~Q;
 
 always @(posedge CLK) begin
