@@ -1,26 +1,48 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 10/14/2025 02:54:55 PM
+// Design Name: 
+// Module Name: dff_asynchRST_tb
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
 module dff_asynchRST_tb();
-	wire d, rstn, clk;
-	reg q;
-	reg [2:0] delay;
+    reg d, rstn, clk;
+	wire q;
 	
-	dff_synchRST dut(.d(d), .rstn(rstn), .clk(clk), .q(q));
+	dff_asynchRST dut(.d(d), .rst(rstn), .clk(clk), .q(q));
 	
-	always #10 clk = ~clk;
+	always #5 clk = ~clk;
 	
-	integer i;
 	initial begin
+		//note that rst is active high
 		clk=0; d=0; rstn=1;
 		
 		//d is 1 and rstn == 0, so q should be 1 on next posedge
-		#15 d = 1;
+		#15 rstn = 0; d = 1;
 		//d is still 1 but rstn == 1, so q should be 0 on next posedge
 		#7 rstn = 1;
 		//d is changing while rst is still active, q -> 0
 		#9 d = 0; #4 d = 1;
-		//rstn is high again, so q should reflect d on next posedge
-		#3 rstn = 1;
+		//rstn is low again, so q should reflect d on next posedge
+		#3 rstn = 0;
 		//d is low and should output to q
 		#4 d = 0; #10;
 		$stop;
 	end
 endmodule
+
