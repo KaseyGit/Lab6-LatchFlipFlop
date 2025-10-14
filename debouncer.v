@@ -1,3 +1,25 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 10/14/2025 03:23:09 PM
+// Design Name: 
+// Module Name: debouncer
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
 module debouncer(input raw, clk, output reg clean);
 	wire TC; //"boolean", indicate when we can consider the signal
 	reg[2:0] counter; //count how many clk cycles raw is active for

@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/14/2025 02:53:28 PM
+// Create Date: 10/14/2025 01:55:27 PM
 // Design Name: 
-// Module Name: dff_asynchRST
+// Module Name: srlatch
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,9 +20,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module dff_asynchRST (input d, rst, clk, output reg q);
-	always @ (posedge clk or negedge rst) begin
-		if (rst) q <= 0;
-		else q <= d;
-	end
+module srlatch(
+    input S,
+    input R,
+    output Q,
+    output Qbar
+    );
+    nor #1 N1(Q, R, Qbar);
+	nor #1 N2 (Qbar, S, Q);
 endmodule

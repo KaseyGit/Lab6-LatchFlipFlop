@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/14/2025 02:53:28 PM
+// Create Date: 10/14/2025 02:09:50 PM
 // Design Name: 
-// Module Name: dff_asynchRST
+// Module Name: srff
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,9 +20,22 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module dff_asynchRST (input d, rst, clk, output reg q);
-	always @ (posedge clk or negedge rst) begin
-		if (rst) q <= 0;
-		else q <= d;
-	end
+module srff(
+    input S,
+    input R,
+    input CLK,
+    output reg Q,
+    output QBAR
+    );
+    
+assign QBAR = ~Q;
+
+always @(posedge CLK) begin
+	case ({S, R})
+		2'b00: Q <= Q;
+		2'b01: Q <= 1'b0;
+		2'b10: Q <= 1'b1;
+		2'b11: Q <= 1'bx;
+	endcase
+end	
 endmodule

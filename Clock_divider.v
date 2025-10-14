@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 10/14/2025 02:53:28 PM
+// Create Date: 10/14/2025 03:01:56 PM
 // Design Name: 
-// Module Name: dff_asynchRST
+// Module Name: Clock_divider
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -19,10 +19,20 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+module Clock_divider(clock_in,clock_out);
 
-module dff_asynchRST (input d, rst, clk, output reg q);
-	always @ (posedge clk or negedge rst) begin
-		if (rst) q <= 0;
-		else q <= d;
-	end
-endmodule
+input clock_in;
+output reg clock_out = 1'b0;
+
+reg[1:0] counter=2'd0;
+
+ always @(posedge clock_in) begin
+ 	counter <= counter + 1;
+ 	if (counter == 2'b01) begin
+ 	clock_out <= ~clock_out; // Toggle the output clock
+ 		counter <= 0;
+    end
+ end
+ endmodule
+
+
