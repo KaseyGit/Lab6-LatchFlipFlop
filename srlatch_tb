@@ -1,4 +1,4 @@
-module SR_Latch_tb();
+module srlatch_tb();
 reg r, s;
 wire q, qbar;
 SR_Latch DUT(.S(s), .R(r), .Q(q), .Qbar(qbar));
