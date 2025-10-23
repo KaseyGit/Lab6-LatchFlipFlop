@@ -21,7 +21,7 @@
 
 
 module dff_asynchRST (input d, rst, clk, output reg q);
-	always @ (posedge clk or negedge rst) begin
+	always @ (posedge clk or posedge rst) begin
 		if (rst) q <= 0;
 		else q <= d;
 	end
